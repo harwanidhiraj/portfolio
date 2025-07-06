@@ -1,0 +1,15 @@
+export const homeKeyWords: string[] = [
+  "Full Stack Developer",
+  "MERN Stack Expert",
+  "Tech Explorer",
+  "Problem Solver",
+  "Clean Code Advocate",
+  "API Integrator",
+  "Backend Builder",
+  "React Developer",
+  "Node.js Developer",
+  "Database Designer",
+  "Performance Optimizer",
+  "Team Player",
+  "Open Source Contributor",
+];
