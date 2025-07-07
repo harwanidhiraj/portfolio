@@ -9,7 +9,6 @@ import {
   useDeleteProjectMutation,
 } from "../../redux/api/portfolioApi";
 import ConfirmModal from "../../components/ConfirmModal";
-// Adjust path
 
 const validationSchema = Yup.object({
   title: Yup.string().required("Title is required"),
@@ -54,7 +53,6 @@ const ProjectsManager = () => {
 
       try {
         if (editId) {
-          // ✅ Corrected line
           await updateProject({ id: editId, formData }).unwrap();
           toast.success("Project updated");
         } else {
@@ -79,7 +77,7 @@ const ProjectsManager = () => {
     formik.setFieldValue("tech", project.tech || "");
     formik.setFieldValue("github", project.gitHubUrl || "");
     formik.setFieldValue("demo", project.liveUrl || "");
-    formik.setFieldValue("image", undefined); // or null
+    formik.setFieldValue("image", undefined);
 
     setEditId(project.id);
     setPreviewImage(project.imageUrl);

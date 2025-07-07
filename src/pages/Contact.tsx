@@ -1,130 +1,3 @@
-// import { useState } from "react";
-// import { ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// const Contact = () => {
-//   const [formData, setFormData] = useState({
-//     from_name: "",
-//     from_email: "",
-//     message: "",
-//   });
-
-//   const handleChange = (
-//     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-//   ) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   return (
-//     <section className="bg-white py-20 px-4">
-//       <div
-//         className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
-//         data-aos="fade-up"
-//       >
-//         <div className="bg-white p-8 rounded-2xl shadow-xl ring-1 ring-gray-100">
-//           <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
-//             Contact Me
-//           </h2>
-//           <p className="text-gray-600 mb-8">
-//             Have a question or want to work together? I’d love to hear from you!
-//           </p>
-
-//           <form className="space-y-6">
-//             <div>
-//               <label className="block text-sm font-medium text-gray-700 mb-1">
-//                 Your Name
-//               </label>
-//               <input
-//                 type="text"
-//                 name="from_name"
-//                 value={formData.from_name}
-//                 onChange={handleChange}
-//                 required
-//                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-//                 placeholder="John Doe"
-//               />
-//             </div>
-
-//             <div>
-//               <label className="block text-sm font-medium text-gray-700 mb-1">
-//                 Email Address
-//               </label>
-//               <input
-//                 type="email"
-//                 name="from_email"
-//                 value={formData.from_email}
-//                 onChange={handleChange}
-//                 required
-//                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-//                 placeholder="you@example.com"
-//               />
-//             </div>
-
-//             <div>
-//               <label className="block text-sm font-medium text-gray-700 mb-1">
-//                 Message
-//               </label>
-//               <textarea
-//                 name="message"
-//                 value={formData.message}
-//                 onChange={handleChange}
-//                 required
-//                 rows={5}
-//                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-//                 placeholder="Write your message here..."
-//               />
-//             </div>
-
-//             <button
-//               type="submit"
-//               className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 rounded-lg transition-shadow shadow-md hover:shadow-xl"
-//             >
-//               ✉️ Send Message
-//             </button>
-//           </form>
-//         </div>
-
-//         <div className="flex flex-col justify-center px-6">
-//           <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-//             Get in Touch
-//           </h3>
-//           <ul className="space-y-4 text-lg text-gray-600">
-//             <li>
-//               <strong>Address:</strong>
-//               <br />
-//               Rajkot, Gujarat.
-//             </li>
-//             <li>
-//               <strong>Email:</strong>
-//               <br />
-//               <a
-//                 href="mailto:harwanidhiraj23@gmail.com"
-//                 className="text-indigo-600 hover:underline"
-//               >
-//                 harwanidhiraj23@gmail.com
-//               </a>
-//             </li>
-//             <li>
-//               <strong>Phone:</strong>
-//               <br />
-//               <a
-//                 href="tel:+8849892389"
-//                 className="text-indigo-600 hover:underline"
-//               >
-//                 8849892389
-//               </a>
-//             </li>
-//           </ul>
-//         </div>
-//       </div>
-
-//       <ToastContainer position="top-right" autoClose={3000} />
-//     </section>
-//   );
-// };
-
-// export default Contact;
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
@@ -184,7 +57,6 @@ const Contact = () => {
         className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
         data-aos="fade-up"
       >
-        {/* Contact Form */}
         <div className="bg-white p-8 rounded-2xl shadow-xl ring-1 ring-gray-100">
           <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
             Contact Me
@@ -276,7 +148,6 @@ const Contact = () => {
           </form>
         </div>
 
-        {/* Contact Info */}
         <div className="flex flex-col justify-center px-6">
           <h3 className="text-2xl font-semibold text-gray-800 mb-6">
             Get in Touch

@@ -164,7 +164,6 @@ const ExperienceManager = () => {
         </Form>
       </Formik>
 
-      {/* Experience list */}
       <div className="space-y-6">
         {isLoading ? (
           <p>Loading...</p>

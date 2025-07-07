@@ -585,6 +585,46 @@ export const portfolioApi = createApi({
         body,
       }),
     }),
+    updateProfile: builder.mutation<
+      {
+        success: boolean;
+        message: string;
+        data: {
+          id: number;
+          name: string;
+          roles: string;
+          description: string;
+          resumeUrl: string;
+          imageUrl: string;
+          createdAt: string;
+          updatedAt: string;
+        };
+        meta: any;
+      },
+      {
+        name: string;
+        roles: string;
+        description: string;
+        resume?: File;
+        image?: File;
+      }
+    >({
+      query: (body) => {
+        const formData = new FormData();
+        formData.append("name", body.name);
+        formData.append("roles", body.roles);
+        formData.append("description", body.description);
+        if (body.resume) formData.append("resume", body.resume);
+        if (body.image) formData.append("image", body.image);
+
+        return {
+          url: "/admin/profile",
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["Profile"],
+    }),
   }),
 });
 
@@ -613,4 +653,5 @@ export const {
   useGetUserProjectsQuery,
   useGetUserInTouchQuery,
   useSendUserMessageMutation,
+  useUpdateProfileMutation,
 } = portfolioApi;

@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { useGetProfileQuery } from "../../redux/api/portfolioApi"; // adjust path
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../redux/api/portfolioApi";
 
 interface FormValues {
   name: string;
@@ -17,6 +20,7 @@ const ProfileManager = () => {
   const [resumeName, setResumeName] = useState<string | null>(null);
 
   const { data, isLoading, isError, error } = useGetProfileQuery();
+  const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -45,15 +49,40 @@ const ProfileManager = () => {
           value ? (value as File).type === "application/pdf" : false
         ),
     }),
-    onSubmit: (values) => {
-      const roles = values.rolesInput.split(",").map((r) => r.trim());
-      console.log("Submitted values:", {
-        ...values,
-        roles,
-      });
-      toast.success("Profile updated successfully!");
-    },
     enableReinitialize: true,
+    onSubmit: async (values, { resetForm }) => {
+      if (!values.profileImage || !values.resumeFile) {
+        toast.error("Please select both image and resume before submitting.");
+        return;
+      }
+
+      try {
+        const payload = {
+          name: values.name,
+          roles: values.rolesInput,
+          description: values.about,
+          resume: values.resumeFile,
+          image: values.profileImage,
+        };
+
+        const response = await updateProfile(payload).unwrap();
+        toast.success(response.message || "Profile updated successfully!");
+
+        resetForm({
+          values: {
+            ...values,
+            profileImage: null,
+            resumeFile: null,
+          },
+        });
+
+        setImagePreview(null);
+        setResumeName(null);
+      } catch (err: any) {
+        toast.error(err?.data?.message || "Failed to update profile.");
+        console.error("API error:", err?.data);
+      }
+    },
   });
 
   useEffect(() => {
@@ -173,6 +202,7 @@ const ProfileManager = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
+              key={formik.values.profileImage?.name || "profileImage"}
               className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-50"
             />
             {formik.touched.profileImage && formik.errors.profileImage && (
@@ -197,6 +227,7 @@ const ProfileManager = () => {
               type="file"
               accept="application/pdf"
               onChange={handleResumeChange}
+              key={formik.values.resumeFile?.name || "resumeFile"}
               className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-50"
             />
             {formik.touched.resumeFile && formik.errors.resumeFile && (
@@ -213,9 +244,10 @@ const ProfileManager = () => {
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
+            disabled={isUpdating}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200 disabled:opacity-50"
           >
-            Save Changes
+            {isUpdating ? "Updating..." : "Save Changes"}
           </button>
         </form>
       )}
