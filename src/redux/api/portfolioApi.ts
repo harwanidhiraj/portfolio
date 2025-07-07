@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const portfolioApi = createApi({
   reducerPath: "portfolioApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/",
+    baseUrl: "https://portfoliobe-hq9q.onrender.com/api/",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("admin_token");
       if (token) {
