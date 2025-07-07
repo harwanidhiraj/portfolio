@@ -35,7 +35,7 @@ const ProjectsManager = () => {
     initialValues: {
       title: "",
       description: "",
-      image: "",
+      image: undefined as File | undefined,
       tech: "",
       github: "",
       demo: "",
